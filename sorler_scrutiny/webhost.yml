@@ -4,15 +4,13 @@
     ports:
       - '8086:8086'
     volumes:
-      - '/mnt/volume0/home_server_folders/influxdb:/var/lib/influxdb2'
-      - '/mnt/volume0/home_server_folders/influxdb_etc:/etc/influxdb2'
+      - 'influxdb:/var/lib/influxdb2'
+      - 'influxdb_etc:/etc/influxdb2'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8086/health"]
       interval: 5s
       timeout: 10s
       retries: 20
-    networks:
-      - defaultnetwork
   
   web:
     image: 'ghcr.io/analogj/scrutiny:master-web'
@@ -20,7 +18,7 @@
     ports:
       - '8080:8080'
     volumes:
-      - '/mnt/volume0/home_server_folders/scrutiny_web/config:/opt/scrutiny/config'
+      - config:/opt/scrutiny/config'
     environment:
       SCRUTINY_WEB_INFLUXDB_HOST: 'influxdb'
     depends_on:
@@ -32,8 +30,7 @@
       timeout: 10s
       retries: 20
       start_period: 10s
-    networks:
-      - defaultnetwork
+
   
   collector:
     image: 'ghcr.io/analogj/scrutiny:master-collector'
@@ -55,5 +52,3 @@
     devices:
       - "/dev/nvme0"
       - "/dev/sda"
-    networks:
-      - defaultnetwork
