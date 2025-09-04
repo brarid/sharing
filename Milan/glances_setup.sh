@@ -1,5 +1,8 @@
 echo "Starting process"
 
+sudo apt update 
+suod apt install glances
+
 sudo cp glances.service /etc/systemd/system -v -v
 sudo systemctl start glances
 sudo systemctl enable glances
