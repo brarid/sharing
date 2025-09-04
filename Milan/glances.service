@@ -1,0 +1,10 @@
+[Unit]
+Description=Glances System Monitoring (Server Mode)
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/glances -s
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
