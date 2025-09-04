@@ -3,7 +3,7 @@ Description=Glances System Monitoring (Server Mode)
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/glances -s
+ExecStart=/usr/bin/glances -w
 Restart=on-abort
 
 [Install]
