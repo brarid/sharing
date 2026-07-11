@@ -4,6 +4,7 @@ iPhone_IP="192.168.1.134"
 iath=`fping $iPhone_IP |grep alive`
 
 
-while read bluetoothctl info "$MAC" | grep -q "Connected: yes"; do
+while true ; do 
+    if $iath && ! bluetoothctl info "$MAC" | grep -q "Connected: yes"; do
  bluetoothctl connect "$MAC"
 done
