@@ -5,6 +5,7 @@ iath=`fping $iPhone_IP |grep alive`
 
 
 while true ; do 
-    if $iath && ! bluetoothctl info "$MAC" | grep -q "Connected: yes"; do
+    if $iath && ! bluetoothctl info "$MAC" | grep -q "Connected: yes" then
  bluetoothctl connect "$MAC"
+ fi
 done
